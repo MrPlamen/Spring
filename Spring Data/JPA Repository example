@@ -1,0 +1,78 @@
+CRUD Methods:
+
+save(S entity): Saves a given entity.
+findById(ID id): Finds an entity by its ID.
+existsById(ID id): Checks if an entity exists by its ID.
+findAll(): Finds all entities.
+findAllById(Iterable<ID> ids): Finds all entities by their IDs.
+count(): Returns the count of entities.
+deleteById(ID id): Deletes an entity by its ID.
+delete(S entity): Deletes a given entity.
+deleteAll(Iterable<? extends S> entities): Deletes multiple entities.
+deleteAll(): Deletes all entities.
+Pagination and Sorting Methods:
+
+findAll(Sort sort): Finds all entities with sorting.
+findAll(Pageable pageable): Finds all entities with pagination.
+JPA-Specific Methods:
+
+flush(): Flushes all pending changes to the database.
+saveAndFlush(S entity): Saves an entity and flushes changes immediately.
+deleteInBatch(Iterable<T> entities): Deletes entities in a batch.
+deleteAllInBatch(): Deletes all entities in a batch.
+
+---------------------------------------------------------
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Employee {
+    @Id
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+
+    // Getters and setters
+}
+
+-----------------------------------------------
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    // Custom query methods can be defined here
+}
+
+-----------------------------------------------
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class EmployeeService {
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    public Employee getEmployeeById(Long id) {
+        return employeeRepository.findById(id).orElse(null);
+    }
+
+    public Employee saveEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
+    }
+
+    // Custom query methods can be used here
+}
+
