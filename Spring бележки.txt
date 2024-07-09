@@ -1,0 +1,4 @@
+Spring Beans
+
+В Spring Boot, когато не знаем точно каква анотация да сложим, слагаме @Component, @Service е когато знаем че е Service (Stateless class, колекция от методи), но @Service-ът също е @Component
+@Repository - клас, с който осъществяваме достъп до нашите данни
