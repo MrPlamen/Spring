@@ -1,0 +1,6 @@
+// Inside the ServiceImplementation constructor. The formatter takes care of null values.
+
+this.modelMapper = new ModelMapper();
+
+this.modelMapper.addConverter(ctx -> LocalDate.parse(ctx.getSource(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                String.class, LocalDate.class);
