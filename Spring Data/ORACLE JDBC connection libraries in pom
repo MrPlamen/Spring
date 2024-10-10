@@ -1,4 +1,6 @@
-    <dependencies>
+<!-- DOWLOAD THE LATEST FROM MAVEN REPO online -->
+
+<dependencies>
         <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc11 -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
