@@ -1,0 +1,23 @@
+// Use Classpath Resource Access: Since you are accessing a file from src/main/resources, you should use classpath access instead of a direct file path. 
+// This is because once the application is packaged (into a JAR), the resources folder is part of the classpath, and using a file path may not work as expected.
+// To access the file properly in a Spring Boot application, use the classpath-based approach:
+
+@Override
+public String readTownsFileContent() throws IOException {
+    ClassPathResource resource = new ClassPathResource("files/json/towns.json");
+    return new String(Files.readAllBytes(resource.getFile().toPath()));
+}
+
+// Here, ClassPathResource loads the file from the resources folder, ensuring it works even when the project is packaged.
+
+// Alternative Using InputStream: If you're using a Spring Boot JAR package, files might not be directly accessible as regular files. 
+// Instead, you should read the file using an InputStream:
+
+@Override
+public String readTownsFileContent() throws IOException {
+    ClassPathResource resource = new ClassPathResource("files/json/towns.json");
+    InputStream inputStream = resource.getInputStream();
+    return new String(inputStream.readAllBytes());
+}
+
+// This way, even if the file is packaged inside a JAR, it will still be accessible.
