@@ -1,0 +1,22 @@
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
+@Override
+public String readCountriesFromFile() throws IOException {
+    InputStream inputStream = getClass().getClassLoader().getResourceAsStream("files/json/countries.json");
+    if (inputStream == null) {
+        throw new IOException("File not found: files/json/countries.json");
+    }
+    return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+}
+
+-------------------------------
+Instead of 
+-------------------------------
+
+private static final String COUNTRIES_PATH = "src/main/resources/files/json/countries.json";
+
+@Override
+public String readCountriesFromFile() throws IOException {
+return Files.readString(Path.of(COUNTRIES_PATH));
+}
